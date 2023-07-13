@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>org.chnjkfp</groupId>
+    <artifactId>lianci</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>lianci</name>
+    <description>lianci</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.13</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.yml</include>
+                    <include>**/*.yml</include>
+                    <include>*.xml</include>
+                    <include>**/*.xml</include>
+                    <include>*.properties</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>*.yml</exclude>
+                    <exclude>**/*.yml</exclude>
+                    <exclude>*.xml</exclude>
+                    <exclude>**/*.xml</exclude>
+                    <exclude>*.properties</exclude>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <server.port>8081</server.port>
+                <profiles.active>dev</profiles.active>
+                <lianci.log.home>/Users/wuwei/work/creditease/logs/lianci.log</lianci.log.home>
+
+                <lianci.datasource.jdbcUrl>jdbc:mysql://pnx-mysql-master-dev.caiwu.corp:3371/lianci?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</lianci.datasource.jdbcUrl>
+                <lianci.datasource.user>lianci</lianci.datasource.user>
+                <lianci.datasource.password>lianci123</lianci.datasource.password>
+
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <server.port>8080</server.port>
+                <profiles.active>test</profiles.active>
+                <lianci.log.home>/viewlogs/lianci/lianci.log</lianci.log.home>
+
+                <lianci.datasource.jdbcUrl>jdbc:mysql://127.0.0.1:3306/lianci?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</lianci.datasource.jdbcUrl>
+                <lianci.datasource.user>root</lianci.datasource.user>
+                <lianci.datasource.password>123456</lianci.datasource.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <properties>
+                <profiles.active>release</profiles.active>
+                <server.port>9090</server.port>
+                <lianci.log.home>/viewlogs/lianci/lianci.log</lianci.log.home>
+
+                <lianci.datasource.jdbcUrl>jdbc:mysql://jgz-43.mysql.creditease.corp:3308/lianci?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true</lianci.datasource.jdbcUrl>
+                <lianci.datasource.user>lianci</lianci.datasource.user>
+                <lianci.datasource.password>wM2SYZHdWh5zaGB1p9LA</lianci.datasource.password>
+            </properties>
+        </profile>
+    </profiles>
+</project>
