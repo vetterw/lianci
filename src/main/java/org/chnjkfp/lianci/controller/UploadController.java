@@ -44,6 +44,7 @@ public class UploadController {
             }
             fileService.saveFile(file.getBytes(), nginxPath, file.getOriginalFilename());
         } catch (Exception e) {
+            System.out.println(e);
             return "upload failure";
         }
         return "upload success";

@@ -36,4 +36,4 @@ mybatis-plus:
 #自定义参数
 define:
   nginx:
-    path: /Users/wuwei39/
+    path: /Users/wuwei/
